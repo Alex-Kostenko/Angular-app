@@ -1,0 +1,33 @@
+<div class="container" >
+  <div class="text-white bg-info p-2 " > 
+    <h2 class="text-center" >Todo App</h2> 
+  </div>
+  <table  class="table" >
+    <thead>
+      <tr scope="row">
+        <th scope="col-1"> # </th>
+        <th scope="col-9"> Task </th>
+        <th scope="col-2" colspan="2" class="text-center" > Status </th>
+        <th scope="col-2" colspan="2" class="text-center" > Control </th>
+      </tr>
+    </thead>
+    <tbody class="table-striped">
+      <tr *ngFor="let task of list; let i = index" scope="row">
+        <th scope="col">{{i}}.</th>
+        <td *ngIf="task.isEdit; else unset "> <input type="text" [(ngModel)]="task.task"> </td>
+        <ng-template #unset> <td> {{task.task}} </td> </ng-template>
+        <!-- <td> {{task.isEdit ? <input type="text" [(ngModel)]="task.task"> :  {{task.task}} }}</td> -->
+        <td> <input type="checkbox" [checked]="task.isDone" (change)="task.isDone = !task.isDone"> </td>
+        <td> {{task.isDone ? 'Done' : 'Not done'}} </td>
+        <td> <div (click)="task.isEdit = !task.isEdit">edit</div> </td>
+        <td> <div (click)="handleClickRemove(i)">Remove</div> </td>
+      </tr>
+    </tbody>
+  </table>
+  <form>
+    <div class="form-group d-flex">
+      <input class="col-10 form-control" type="text" [(ngModel)]="valueInput" placeholder="Input task" name="todo">
+      <input class="col-2 btn btn-primary" type="submit" value="ADD" (click)="handleClick(valueInput)">
+    </div>
+  </form>
+</div>

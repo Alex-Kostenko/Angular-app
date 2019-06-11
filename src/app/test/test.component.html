@@ -1,7 +1,32 @@
 <div class="container">
-  <div class="row">
-    <h1 class="col-6"> {{text1}} </h1>
-    <div class="col-4"> {{text}} </div>
-    <div class="col"> {{text1}} </div>
+  <form>
+    <div class="form-group">
+      <h1 class="text-center text-primary">Todo App</h1>
+      <div class="input-group-prepend">
+        <input type="text" class="form-control" placeholder="name"[(ngModel)]="name" name="todo">
+        <span class="input-group-text"> Add </span>
+      </div>
+    </div>
+  </form>
+
+  <ul>
+    <li *ngFor="let item of arr; let i = index">
+      {{i+1}}. {{item}}
+    </li>
+  </ul>
+
+  <button (click)="show = !show" > </button>
+  <div *ngIf="show; else unset "> Text1 </div>
+  <ng-template #unset> Text2 </ng-template>
+
+
+  <div [ngSwitch]="count">
+    <ng-template ngSwitchCase="1">{{count * 10}}</ng-template>
+    <ng-template ngSwitchCase="2">{{count * 100}}</ng-template>
+    <ng-template ngSwitchDefault>{{count * 1000}}</ng-template>
   </div>
+
+  <label>Введите имя:</label>
+  <input [(ngModel)]="name" placeholder="name" />
+  <h1>Добро пожаловать {{name}}!</h1>
 </div>
